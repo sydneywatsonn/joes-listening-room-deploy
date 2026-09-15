@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0a0908;
+  --ink-elevated: #141210;
+  --ink-soft: #1c1916;
+  --cream: #e8e2d8;
+  --cream-muted: #9e9990;
+  --cream-dim: #9e9990;
+  --amber: #a85d28;
+  --amber-soft: #a85d28;
+  --vinyl: #0a0908;
+  --ivory: #e8e2d8;
+  --warm-gray: #9e9990;
+  --burnt-amber: #a85d28;
+  --slate-blue: #89A6BA;
+  --ember-red: #A9472F;
+  --slate-blue-soft: #A5B9C8;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-elevated: var(--ink-elevated);
+  --color-ink-soft: var(--ink-soft);
+  --color-cream: var(--cream);
+  --color-cream-muted: var(--cream-muted);
+  --color-cream-dim: var(--cream-dim);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --color-vinyl: var(--vinyl);
+  --color-ivory: var(--ivory);
+  --color-warm-gray: var(--warm-gray);
+  --color-burnt-amber: var(--burnt-amber);
+  --color-slate-blue: var(--slate-blue);
+  --color-ember-red: var(--ember-red);
+  --color-slate-blue-soft: var(--slate-blue-soft);
+  --font-display: var(--font-epilogue);
+  --font-sans: var(--font-epilogue);
+  --font-body: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-epilogue), Epilogue, system-ui, sans-serif;
+  min-height: 100dvh;
+}
+
+.type-headline {
+  font-family: var(--font-instrument-sans), "Instrument Sans", system-ui, sans-serif;
+  font-weight: 475;
+  font-style: normal;
+  font-variation-settings: "wght" 475, "wdth" 100;
+  letter-spacing: -0.022em;
+  line-height: 0.92;
+  color: var(--slate-blue);
+}
+
+.type-headline.text-ember,
+.text-ember {
+  color: var(--ember-red);
+  -webkit-text-fill-color: var(--ember-red);
+}
+
+.type-meta {
+  font-family: var(--font-instrument-sans), "Instrument Sans", system-ui, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings: "wght" 500, "wdth" 100;
+  color: var(--warm-gray);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--burnt-amber) 35%, transparent);
+  color: var(--cream);
+}
+
+@keyframes headline-breathe {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.88;
+    letter-spacing: -0.024em;
+  }
+  50% {
+    transform: translateY(-1.5px);
+    opacity: 0.98;
+    letter-spacing: -0.014em;
+  }
+}
+
+@keyframes headline-light-sweep {
+  0% {
+    background-position: 130% 0;
+  }
+  100% {
+    background-position: -30% 0;
+  }
+}
+
+.headline-alive {
+  animation: headline-breathe 6.2s ease-in-out infinite;
+  will-change: transform, opacity, letter-spacing;
+  background-image: linear-gradient(
+    105deg,
+    var(--slate-blue) 0%,
+    var(--slate-blue) 42%,
+    var(--slate-blue-soft) 50%,
+    var(--slate-blue) 58%,
+    var(--slate-blue) 100%
+  );
+  background-size: 220% 100%;
+  background-position: 50% 0;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.headline-alive:hover {
+  animation:
+    headline-breathe 6.2s ease-in-out infinite,
+    headline-light-sweep 2.8s ease-in-out 1;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ember-breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.96);
+    opacity: 0.78;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes ember-glow-breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.97);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.08);
+    opacity: 0.85;
+  }
+}
+
+.ember-core {
+  animation: ember-breathe 5.6s ease-in-out infinite;
+  will-change: transform, opacity;
+  transform: translate(-50%, -50%);
+}
+
+.ember-glow {
+  animation: ember-glow-breathe 5.6s ease-in-out infinite;
+  will-change: transform, opacity;
+  transform: translate(-50%, -50%);
+}
+
+@media (hover: none) {
+  .enter-cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vinyl-spin {
+  animation: spin-slow 28s linear infinite;
+  will-change: transform;
+  opacity: 0.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .vinyl-spin,
+  .ember-core,
+  .ember-glow,
+  .headline-alive {
+    animation: none !important;
+  }
+
+  .headline-alive {
+    color: var(--slate-blue);
+    -webkit-text-fill-color: var(--slate-blue);
+    background-image: none;
+  }
+
+  .record-card {
+    transition: none !important;
+  }
+
+  .record-card:hover {
+    transform: none !important;
+  }
+}
